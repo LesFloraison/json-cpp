@@ -140,7 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\json-cpp.cpp" />
+    <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\JSON.cpp" />
   </ItemGroup>
   <ItemGroup>
