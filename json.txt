@@ -1,0 +1,20 @@
+{
+  "person": {
+    "name": "Alice",
+    "age": 25,
+    "address": {
+      "city": "New York",
+      "zip": "10001"
+    }
+  },
+  "primitive":"triangle",
+  "employee": {
+    "name": "Bob",
+    "array":[8,[4,3,{"name":"Bob","age":22,"address":{"city":"Paris","zip":"11111"}},2],9,"cat",5,false],
+    "age": 22,
+    "address": {
+      "city": "Paris",
+      "zip": "11111"
+    }
+  }
+}
