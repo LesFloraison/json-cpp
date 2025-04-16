@@ -20,8 +20,7 @@ int main() {
         std::string content = readFileToString(filename);
 
         JSON* j = new JSON(content);
-        std::string primitive = std::any_cast<std::string>(j->key_value[std::string("primitive")]);
-        std::cout << primitive << std::endl;
+        std::cout << j->getValue<std::string>("primitive") << std::endl;
         delete j;
     }
     catch (const std::exception& e) {

@@ -4,7 +4,7 @@ JSON::JSON(std::string m_jsonStr)
 {
     jsonStr = m_jsonStr;
     normalize(jsonStr);
-    jsonStr = jsonStr.substr(1, jsonStr.length() - 2); //remove {}
+    jsonStr = jsonStr.substr(1, jsonStr.length() - 2) + std::string(","); //remove {} add ','
     while (jsonStr.find_first_of(":") != std::string::npos) {
         jsonStr = jsonStr.substr(jsonStr.find_first_of("\"") + 1);
         std::string key = jsonStr.substr(0, jsonStr.find_first_of("\""));
@@ -74,6 +74,13 @@ void JSON::normalize(std::string& str) {
     str.erase(std::remove_if(str.begin(), str.end(),
         [](unsigned char c) { return c == ' ' || c == '\n' || c == '\r'; }),
         str.end());
+}
+
+
+
+JSON JSON::getJSON(std::string key)
+{
+    return JSON(std::any_cast<JSON>(key_value[key]));
 }
 
 std::vector<std::any> JSON::parseArray(std::string m_arrStr)
