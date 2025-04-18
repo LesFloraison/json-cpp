@@ -72,8 +72,29 @@ JSON::~JSON()
 
 void JSON::normalize(std::string& str) {
     str.erase(std::remove_if(str.begin(), str.end(),
-        [](unsigned char c) { return c == ' ' || c == '\n' || c == '\r'; }),
+        [](unsigned char c) { return c == '\n' || c == '\r'; }),
         str.end());
+
+    std::string normalizedStr;
+    bool in_quotes = false;
+
+    for (int i = 0; i < str.size(); ++i) {
+        char c = str[i];
+
+        if (c == '"') {
+            in_quotes = !in_quotes;
+            normalizedStr += c;
+        }
+        else if (in_quotes) {
+            normalizedStr += c;
+        }
+        else {
+            if (c != ' ') {
+                normalizedStr += c;
+            }
+        }
+    }
+    str = normalizedStr;
 }
 
 
@@ -81,6 +102,16 @@ void JSON::normalize(std::string& str) {
 JSON JSON::getJSON(std::string key)
 {
     return JSON(std::any_cast<JSON>(key_value[key]));
+}
+
+bool JSON::exist(std::string key)
+{
+    if (key_value.find(key) == key_value.end()) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
 
 std::vector<std::any> JSON::parseArray(std::string m_arrStr)

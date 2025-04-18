@@ -20,7 +20,9 @@ int main() {
         std::string content = readFileToString(filename);
 
         JSON* j = new JSON(content);
-        std::cout << j->getValue<std::string>("primitive") << std::endl;
+        if (j->exist("primitive")) {
+            std::cout << j->getValue<std::string>("primitive") << std::endl;
+        }
         delete j;
     }
     catch (const std::exception& e) {

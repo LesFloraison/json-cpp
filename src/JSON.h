@@ -14,7 +14,12 @@ public:
 	{
 		std::istringstream iss(std::any_cast<std::string>(key_value[key]));
 		R r;
-		iss >> r;
+		if constexpr (std::is_same_v<R, std::string>) {
+			return std::any_cast<std::string>(key_value[key]);
+		}
+		else {
+			iss >> r;
+		}
 		return r;
 	}
 
@@ -34,6 +39,7 @@ public:
 	JSON getJSON(std::string key);
 	std::vector<JSON*> subJsons;
 	void normalize(std::string& str);
+	bool exist(std::string key);
 	std::vector<std::any> parseArray(std::string m_arrStr);
 	std::map<std::string, std::any> key_value;
 	std::string jsonStr;
